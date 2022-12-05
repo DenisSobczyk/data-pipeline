@@ -53,3 +53,5 @@ In order to start the application, please execute the following steps in the acc
 		Host = spark://spark-master
 		Port = 7077
 8. Start the DAG "finance_data_pipeline_dev" by hitting the trigger
+
+Eventually, the pipeline should have executed all tasks successfully and Hue (localhost:32762) & the Dash appplication (localhost:5001) can be accessed.
