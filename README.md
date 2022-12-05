@@ -55,3 +55,8 @@ In order to start the application, please execute the following steps in the acc
 8. Start the DAG "finance_data_pipeline_dev" by hitting the trigger
 
 Eventually, the pipeline should have executed all tasks successfully and Hue (localhost:32762) & the Dash appplication (localhost:5001) can be accessed.
+
+## Orientation Guide
+
+_Where can I find the DAG file?_
+mnt/airflow/dags/finance_data_pipeline_dev.py
