@@ -40,15 +40,16 @@ In order to start the application, please execute the following steps in the acc
 5. Enter Apache Airflow on localhost:8080 (username=airflow, password=airflow)
 6. Set the HIVE connection:
 
-		Conn id = _hive_conn_
-		Conn Type = _Hive Server 2 Theft_
-		Host = _hive-server_
-		Login = _hive_
-		Password = _hive_
+		Conn id = hive_conn
+		Conn Type = Hive Server 2 Theft
+		Host = hive-server
+		Login = hive
+		Password = hive
 		Port = 10000 
 7. Set the Spark connection:
 
-		Conn id = _spark_conn_
-		Conn Type = _Spark_
-		Host = _spark://spark-master_
+		Conn id = spark_conn
+		Conn Type = Spark
+		Host = spark://spark-master
 		Port = 7077
+8. Start the DAG "finance_data_pipeline_dev" by hitting the trigger
