@@ -7,4 +7,4 @@ The intention of this project is to move the data from API to a disturbed file s
 
 ## Conceptual Framework
 
-!(https://github.com/DenisSobczyk/data-pipeline/blob/3ad40b9d6bafd71c1ede5807ddbbeb0193e19c82/Architecture_ProcessChart_20221205-1.png)
+![](https://github.com/DenisSobczyk/data-pipeline/blob/main/Architecture_ProcessChart_20221205-1.png)
