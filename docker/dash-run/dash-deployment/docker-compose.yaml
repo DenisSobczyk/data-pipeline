@@ -1,0 +1,22 @@
+version: '3.7'
+services:
+
+  dashboard:
+    build: 
+      context: ./
+    container_name: ${COMPOSE_PROJECT_NAME}_dashboard
+    hostname: ${COMPOSE_PROJECT_NAME}_dashboard
+    restart: always
+    ports:
+      - 5001:80
+    networks:
+      - network 
+    volumes:
+      - /Users/denco_23/Documents/IU/3_Semester/Data_Engineering_II/Finance_API/Pipeline/data_pipeline/mnt/airflow/dags/data:/wd/data
+      - /Users/denco_23/Documents/IU/3_Semester/Data_Engineering_II/Finance_API/Pipeline/data_pipeline/docker/dashboard-deployment-main/dash-deployment/app:/wd
+    
+
+      
+networks:
+  network:
+    driver: bridge
