@@ -1,9 +1,8 @@
 #!/bin/bash
 
-# Build the base images from which are based the Dockerfiles
-# then Startup all the containers at once 
+# Build Dockerfile base images
+# Start all container by executing this file
 docker build -t hadoop-base docker/hadoop/hadoop-base && \
 docker build -t hive-base docker/hive/hive-base && \
 docker build -t spark-base docker/spark/spark-base && \
-docker build -t dash docker/dash && \
 docker-compose up -d --build
