@@ -26,7 +26,7 @@ For the visualization, the _Close_ and the _Volume_ attribute of the following s
 
 Amazon, Nvidia, Coca Cola, S&P500, and Gold commodity.
 
-![Conceptual Framework Visual](https://github.com/DenisSobczyk/data-pipeline/blob/main/Architecture_ProcessChart_20221205-1.png)
+![Conceptual Framework Visual](https://github.com/DenisSobczyk/data-pipeline/blob/main/Architecture_ProcessChart_20221205-1pdf)
 
 ## Technical prerequisites & Execution Manual
 This project requires to have Docker and Docker-Compose installed on your computer. Moreover, a Python IDE as well a textfile editor of your choice could also be helpful. For the Docker hardware resources 4 gigabyte RAM have been used to run the environment.
