@@ -11,26 +11,31 @@ from py.data_ingestion import data_ingestion
 from py.preprocess_csv_data import preprocess_csv_data
 
 
-
+'''
+This file contains all processing / orchestration tasks for the DAG
+'''
 
 default_args = {
     "owner": "airflow",
     "retries": 3,
 }
-#
+# initialize DAG
 with DAG("finance_data_pipeline_dev", start_date=datetime(2022, 10 ,31),
     schedule_interval="@daily", default_args=default_args, catchup=False) as dag:
 
+    # data ingestion operation
     data_ingestion = PythonOperator(
         task_id="data_ingestion",
         python_callable=data_ingestion
     )
 
+    # data preprocessing operation
     preprocess_csv_data = PythonOperator(
         task_id="preprocess_csv_data",
         python_callable=preprocess_csv_data
     )
 
+    # store data in hdfs
     save_data_hdfs = BashOperator(
         task_id= "save_data_hdfs",
         bash_command="""
@@ -39,7 +44,7 @@ with DAG("finance_data_pipeline_dev", start_date=datetime(2022, 10 ,31),
            
         """
     )
-
+    # create tables in HIVE
     create_table_hive = HiveOperator(
         task_id="create_table_hive",
         hive_cli_conn_id="hive_conn",
@@ -439,7 +444,7 @@ with DAG("finance_data_pipeline_dev", start_date=datetime(2022, 10 ,31),
             STORED AS TEXTFILE;
             """)
 
-
+    # process financial security data
     finance_processing = SparkSubmitOperator(
         task_id="finance_processing",
         application= "/opt/airflow/dags/scripts/finance_data_processing.py",

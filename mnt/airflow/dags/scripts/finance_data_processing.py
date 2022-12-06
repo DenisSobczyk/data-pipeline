@@ -6,14 +6,12 @@ from pyspark.sql.functions import from_json
 warehouse_location = abspath('spark-warehouse')
 
 # Create Spark Session
-
 spark = SparkSession \
     .builder \
     .appName("Finance Data") \
     .config("spark.sql.warehouse.dir", warehouse_location) \
     .enableHiveSupport() \
     .getOrCreate()
-
 
 # create dictionary to map tickers with data table names
 dict_ = {'AAPL': 'apple', 'AMZN': 'amazon', 'BA':'boeing', 'CAT': 'caterpillar',\
@@ -25,16 +23,16 @@ dict_ = {'AAPL': 'apple', 'AMZN': 'amazon', 'BA':'boeing', 'CAT': 'caterpillar',
          'VZ':'verizon', 'V':'visa', 'WBA':'walgreens_boots_alliance', \
          'WMT': 'walmart', '^GSPC':'sp500', '^IXIC':'nasdaq'}
 
-#dict_1 = {'AAPL': 'apple' }
-
+# process all CSV files into the matching HIVE tables
+# matching predefined in dictionary "dict_"
 for i in dict_:
 
     try:
         # Read the file from the HDFS
         df = spark.read.csv('hdfs://namenode:9000/Finance_Data/data/{}_data_yahoo.csv'.format(i), header=True)
         # Load the columns and create dataframe
-        data = df.select('Date','High', 'Low', 'Open', 'Close', 'Volume', 'Adj_Close')
+        data = df.select('Date', 'High', 'Low', 'Open', 'Close', 'Volume', 'Adj_Close')
         # Export the dataframe into the Hive table forex_rates
         data.write.mode("append").insertInto("{}_data".format(dict_[i]))
     except:
-        print(i, " includes a mistake")
+        print("Failure: detection in ", i)
