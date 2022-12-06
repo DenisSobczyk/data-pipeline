@@ -1,8 +1,0 @@
-# Github repository link:
-https://github.com/DenisSobczyk/data-pipeline.git
-
-#Commands to run the Docker environment in terminal / command line
-chmod +x start.sh
-./start.sh
-
-# If Docker has been installed before, these commands should start all Docker containers
