@@ -15,13 +15,12 @@ services:
           max-size: "10m"
     ports:
       - "32769:5432"
-    #volumes:
-      #- ./mnt/postgres:/var/lib/postgresql/data/pgdata
+
     environment:
       - POSTGRES_USER=airflow
       - POSTGRES_PASSWORD=airflow
       - POSTGRES_DB=airflow_db
-      #- PGDATA=/var/lib/postgresql/data/pgdata
+
     healthcheck:
       test: [ "CMD", "pg_isready", "-q", "-d", "airflow_db", "-U", "airflow" ]
       timeout: 45s
@@ -268,35 +267,22 @@ services:
       interval: 10s
       retries: 10
 
-  #dash:
-  #  build: ./docker/dash
-  #  restart: always
-  #  container_name: dash
-  #  ports:
-  #    - 8050:8050
-  #  depends_on:
-  #     postgres:
-  #      condition: service_healthy
-  #  healthcheck:
-  #    test: [ "CMD", "nc", "-z", "dash", "8050" ]
-  #    timeout: 45s
-  #    interval: 10s
-  #    retries: 10
 
-  dash-run:
-    build: ./docker/dash-run
-    container_name: dash-run
+  dashboard:
+    build: ./docker/dash-run/dash-deployment/.
+    container_name: ${COMPOSE_PROJECT_NAME}_dashboard
+    hostname: ${COMPOSE_PROJECT_NAME}_dashboard
+    restart: always
     ports:
-      - 8050:8050
+      - 5001:80
     volumes:
-      - .mnt/airflow/dags:/opt/dash/data
+      - ./mnt/airflow/dags/data:/wd/data
+      - ./docker/dash-run/dash-deployment/app:/wd
     healthcheck:
-      test: [ "CMD", "nc", "-z", "dash-run", "8050" ]
+      test: [ "CMD", "nc", "-z", "dashboard", "80" ]
       timeout: 45s
       interval: 10s
       retries: 10
-
-
 
     
 
